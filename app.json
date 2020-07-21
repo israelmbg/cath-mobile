@@ -1,0 +1,12 @@
+{
+  "name": "cath-mobile",
+  "displayName": "cath-mobile",
+  "expo": {
+    "name": "cath-mobile",
+    "slug": "cath-mobile",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
