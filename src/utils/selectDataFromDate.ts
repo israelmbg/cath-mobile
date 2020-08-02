@@ -1,5 +1,7 @@
-export default function selectTodaysDate(date: string) {
-  const today = date.split(' ');
+export function collectDateData() {
+  const rawDate = Date();
 
-  return today[2];
+  const dateArray = rawDate.split(' ');
+
+  return dateArray;
 }

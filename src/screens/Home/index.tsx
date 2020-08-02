@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
 
 import api from '../../services/api';
-import selectDataFromDate from '../../utils/selectDataFromDate';
+
+import { collectDateData } from '../../utils/selectDataFromDate';
 
 import {
   Container,
@@ -12,20 +12,31 @@ import {
   SaintName,
 } from './styles';
 
+interface ISant {
+  celebrationDay: number;
+  name: string;
+}
+
 const Home: React.FC = () => {
-  const [data, setData] = useState('');
+  const [sant, setSant] = useState<ISant>();
 
   useEffect(() => {
-    async function fetch() {
-      const response = await api.get('/sants/Jul');
+    const date = collectDateData();
 
-      const todayDate = Number(selectDataFromDate(Date())) - 1;
+    async function fetchSantOfTheDay(month: string, day: string) {
+      const response = await api.get(`/sants/${month}/${day}`);
 
-      setData(response.data[todayDate].name);
+      return response.data;
     }
 
-    fetch();
-  });
+    const setTodaySant = async () => {
+      const currentSant = await fetchSantOfTheDay(date[1], date[2]);
+
+      setSant(currentSant);
+    };
+
+    setTodaySant();
+  }, []);
 
   return (
     <Container>
@@ -33,7 +44,11 @@ const Home: React.FC = () => {
         <TitleText>Cath</TitleText>
       </TitleContainer>
       <Content>
-        <SaintName>{data}</SaintName>
+        {sant ? (
+          <SaintName>{sant?.name}</SaintName>
+        ) : (
+          <SaintName>Loading...</SaintName>
+        )}
       </Content>
     </Container>
   );
