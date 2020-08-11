@@ -1,12 +1,21 @@
 {
-  "name": "cath-mobile",
-  "displayName": "cath-mobile",
+  "name": "Cath",
+  "displayName": "Cath",
   "expo": {
-    "name": "cath-mobile",
-    "slug": "cath-mobile",
+    "name": "Cath",
+    "slug": "cath",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "description": "A simple Catholic App",
+    "ios": {
+      "bundleIdentifier": "com.aquaerium.cath",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.aquaerium.cath",
+      "versionCode": 1
+    }
   }
 }
